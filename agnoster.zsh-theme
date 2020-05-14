@@ -160,7 +160,13 @@ prompt_agnoster_setup() {
   autoload -Uz add-zsh-hook
   autoload -Uz vcs_info
 
-  prompt_opts=(cr subst percent)
+  prompt_opts=(cr percent sp subst)
+  
+  # https://github.com/agnoster/agnoster-zsh-theme/pull/60
+  # borrowed from promptinit, sets the prompt options in case pure was not
+  # initialized via promptinit.
+  setopt noprompt{bang,cr,percent,subst} "prompt${^prompt_opts[@]}"
+  # End change
 
   add-zsh-hook precmd prompt_agnoster_precmd
 
